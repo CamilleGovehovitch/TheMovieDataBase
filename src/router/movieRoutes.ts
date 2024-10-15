@@ -1,11 +1,11 @@
 import { Router} from 'express';
-import { getMovies } from '../controllers/movieController';
+import { getMoviesDownload, getMovieByIdDownload} from '../controllers/movieController';
 
 const router: Router = Router();
 
 // GET all movies
-router.get('/', getMovies);
-// router.get('/movies/:id', getMovieById);
+router.get('/movies-download', getMoviesDownload);
+router.get('/movies-download/:id', getMovieByIdDownload);
 
 
 
