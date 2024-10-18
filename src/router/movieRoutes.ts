@@ -8,8 +8,9 @@ router.get('/movies', getMovies);
 // GET movie by id
 router.get('/movie/:id', getMovieById);
 // GET list of movies to download
+// GET movie pdf list
 router.get('/movies-download', getMoviesDownload);
-// GET movie to download
+// GET movie pdf
 router.get('/movies-download/:id', getMovieByIdDownload);
 // SEARCH movie
 router.get('/movies-search', getMoviesSearch);
