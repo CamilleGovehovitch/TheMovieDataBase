@@ -4,10 +4,10 @@ import fs from "fs";
 import path from "path";
 import axios from "axios";
 
-interface Movies {
-  results: Movie[];
-}
-interface Movie {
+// interface Movies {
+//   results: Movie[];
+// }
+type Movie = {
   id: number;
   title: string;
   overview: string;
