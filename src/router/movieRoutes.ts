@@ -1,5 +1,4 @@
 import { Router} from 'express';
-
 import { getMoviesDownload, getMovieByIdDownload, getMovies, getMovieById, getMoviesSearch} from '../controllers/movieController';
 
 const router: Router = Router();
