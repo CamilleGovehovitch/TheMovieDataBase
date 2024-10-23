@@ -5,9 +5,6 @@ import { moviesPdfProcessor } from "../processors/pdfProcessor";
 type Movies ={
   results: Movie[];
   data: Movie[];
-type Movies ={
-  results: Movie[];
-  data: Movie[];
 }
 type Movie = {
   id: number;
@@ -16,7 +13,6 @@ type Movie = {
   original_language: string;
   vote_average: number;
   poster_path: string;
-  original_title: string
   original_title: string
 }
 
@@ -39,7 +35,6 @@ export const getMovieById = async (req: Request, res: Response): Promise<void> =
   try {
     let idParam: string = req.params.id;
     const tmdbResponse = await axios.get<Movies>(`https://api.themoviedb.org/3/movie/${idParam}?api_key=${process.env.API_KEY}`);
-    console.log(tmdbResponse.data);
     if (!tmdbResponse.data) {
       res.status(404).json({message: 'An error occured during the process, no movie was found'});
       return
