@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getMoviesDownload, getMovieByIdDownload, getMovies, getMovieById, getMoviesSearch } from "../controllers/movieController";
+import { getMoviesDownload, getMovieByIdDownload, getMovies, getMovieById, getMoviesSearch, getMoviesSearchDownload } from "../controllers/movieController";
 
 const router: Router = Router();
 
@@ -13,6 +13,9 @@ router.get("/movies-download", getMoviesDownload);
 router.get("/movies-download/:id", getMovieByIdDownload);
 // SEARCH movie
 router.get("/movies-search", getMoviesSearch);
+// SEARCH movie download
+router.get("/movies-search-download", getMoviesSearchDownload);
+
 
 export default router;
 

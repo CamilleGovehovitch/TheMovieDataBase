@@ -14,6 +14,7 @@ type Movie = {
   original_language: string;
   vote_average: number;
   poster_path: string;
+  original_title: string
 }
 
 export const moviesPdfProcessor = async (req: Request, res: Response, movies: Movie[]): Promise<void> => {
@@ -32,8 +33,8 @@ export const moviesPdfProcessor = async (req: Request, res: Response, movies: Mo
 
   for (const movie of arrayMovies) {
     try {
-      let yCoordinates = doc.widthOfString(movie.title);
-
+      let yCoordinates = doc.widthOfString(movie.original_title);
+      
       if (arrayMovies.length <= 1) {
         // CREATE image path
         const imagePath = `https://image.tmdb.org/t/p/w500/${movie.poster_path}.jpg`;
@@ -51,7 +52,7 @@ export const moviesPdfProcessor = async (req: Request, res: Response, movies: Mo
 
       doc
         .font("Helvetica")
-        .text(movie.title)
+        .text(movie.original_title)
         .fontSize(20)
         .link(doc.x, doc.y, yCoordinates, -35, `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${process.env.API_KEY}`);
       doc.text("Overview" + ":" + movie.overview).fontSize(16);

@@ -111,5 +111,36 @@ export const getMoviesSearch = async (req: Request, res: Response): Promise<void
     return
   }
 }
+export const getMoviesSearchDownload = async (req: Request, res: Response): Promise<void> => {
+  let query:any;
+  const searchQuery = req.query.query as string;
 
-const url = 'https://api.themoviedb.org/3/search/movie?include_adult=true&language=en-US&page=1';
+  try {
+    if (!req.query) {
+      res.status(404).json({message: 'An error occured, some querries are empty'});
+      return;
+    } else {
+       query = req.query;
+    }
+    const moviesResponse = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${{query}}&api_key=${process.env.API_KEY}`);
+
+    if (!moviesResponse.data.results || !moviesResponse.data) {
+      res.status(404).json({message: 'No movies was found'});
+      return
+    }
+    console.log(moviesResponse.data.results, 'RESULTS');
+     // Define headers for file download
+     res.setHeader("Content-Type", "application/pdf");
+     res.setHeader("Content-Disposition", `attachment; filename=${searchQuery}.pdf`);
+     
+     await moviesPdfProcessor(req, res, moviesResponse.data.results);
+
+    return
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({message: 'An error occured during the process'});
+    return
+  }
+}
+
+
